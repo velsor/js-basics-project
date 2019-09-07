@@ -71,6 +71,22 @@ body.no-scroll {
     font-size: .875rem;
 }
 
+.project-link:after {
+    content: '|';
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.project-link:last-child:after {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .project-link:after {
+        display: none;
+    }
+}
+
 .footer-inner {
     display: flex;
     flex-direction: column;
@@ -354,7 +370,7 @@ form button[type="submit"]:not(.btn-send) {
 
 .modal-menu__item.is-submenu {
     padding-right: 3rem;
-    background: url(assets/icons/icon-angle.svg) no-repeat;
+    background: url(../assets/icons/icon-angle.svg) no-repeat;
     background-position: calc(100% - 1.1rem) center;
 }
 
@@ -452,7 +468,7 @@ form button[type="submit"]:not(.btn-send) {
 
 .sidebar .list-group-item .dropdown-toggle::after {
     content: "";
-    background: url(assets/icons/icon-angle.svg) no-repeat;
+    background: url(../assets/icons/icon-angle.svg) no-repeat;
     background-position: center;
     background-size: 7px 11px;
     border: none;
@@ -536,13 +552,13 @@ form button[type="submit"]:not(.btn-send) {
 }
 
 .main-carousel .carousel-control-prev-icon {
-    background-image: url(assets/icons/icon-angle.svg);
+    background-image: url(../assets/icons/icon-angle.svg);
     transform: rotate(180deg);
     margin-left: -3px;
 }
 
 .main-carousel .carousel-control-next-icon {
-    background-image: url(assets/icons/icon-angle.svg);
+    background-image: url(../assets/icons/icon-angle.svg);
 }
 
 .main-carousel .carousel-caption {
@@ -658,17 +674,17 @@ form button[type="submit"]:not(.btn-send) {
     position: relative;
     width: 1.25rem;
     height: 1.25rem;
-    background: url(assets/icons/icon-star-border.svg) center no-repeat;
+    background: url(../assets/icons/icon-star-border.svg) center no-repeat;
     background-size: contain;
 }
 
 .icon-star.active {
-    background: url(assets/icons/icon-star-border-active.svg) center no-repeat;
+    background: url(../assets/icons/icon-star-border-active.svg) center no-repeat;
     background-size: contain;
 }
 
 .icon-star.checked {
-    background: url(assets/icons/icon-star.svg) center no-repeat;
+    background: url(../assets/icons/icon-star.svg) center no-repeat;
     background-size: contain;
 }
 
@@ -938,13 +954,13 @@ form button[type="submit"]:not(.btn-send) {
 }
 
 .product-carousel .carousel-control-prev-icon {
-    background-image: url(assets/icons/icon-angle.svg);
+    background-image: url(../assets/icons/icon-angle.svg);
     transform: rotate(180deg);
     margin-left: -3px;
 }
 
 .product-carousel .carousel-control-next-icon {
-    background-image: url(assets/icons/icon-angle.svg);
+    background-image: url(../assets/icons/icon-angle.svg);
 }
 
 @media all and (max-width: 767px) {

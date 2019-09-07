@@ -4,7 +4,7 @@
   "description": "\"Sample project for the JS basics training course\"",
   "main": "index.js",
   "scripts": {
-    "start": "static src --port 8080",
+    "start": "static src -c 1 --port 8080",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
