@@ -71,6 +71,29 @@ const footer = new Footer(<element>, footerLinks);
 
 class Footer {
   constructor(element, links) {
+    const layout = `
+    <div class="container">
+      <div class="footer-inner">
+          <div class="footer-menu">
+              <!--ЗДЕСЬ БУДУТ ССЫЛКИ-->
+          </div>
+          <div>
+              © 1998-2019, AnyShop.com, Inc. or its affiliates
+          </div>
+      </div>
+    </div>
+  `;
+  element.innerHTML = layout;
+
+  const footerMenu = document.querySelector('.footer-menu');
+  let linksMenu = '';
+  links.forEach(element => {
+    const href = element.href;
+    const title = element.title;
+    linksMenu += `<a href="${href}" class="project-link text-muted">${title}</a>`;
+  });
+
+  footerMenu.innerHTML = linksMenu;
   }
 }
 
