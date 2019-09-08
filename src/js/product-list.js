@@ -108,7 +108,83 @@ const product = {
 
 class ProductList {
     constructor(element){
-        // ВАШ КОД
+      const layout = `
+        <div class="row justify-content-end">
+          <div class="col-lg-9">
+              <h3 class="section-title">Top Recommendations for You</h3>
+              <div class="row homepage-cards">
+                  <!--ВОТ ЗДЕСЬ БУДУТ КАРТОЧКИ ТОВАРОВ-->
+              </div>
+          </div>
+        </div>
+      `;
+      element.innerHTML = layout;
+
+      
+      const cards = document.querySelector('.homepage-cards');
+      let allCards = '';
+      const promise = fetch('data/products.json')
+                     .then(response => response.json())
+                     .then((data) => {
+                      data.forEach((element) => {
+                        const imgUrl = element.imageUrl;
+                        const title = element.title;
+                        let ratingStars = 0;
+                        let reviewAmount = 0;
+                        if (element.rating != null) {
+                          reviewAmount = element.rating.reviewsAmount;
+                          ratingStars = element.rating.stars;
+                        }
+                        const price = element.price;
+                        const oldPrice = element.oldPrice;
+                        // Создаем звезды
+                        let starElement = `<i class="icon-star"></i>`;
+                        let starCheckedElement = `<i class="icon-star checked"></i>`;
+                        let allStars = '';
+                        for (let i = 0; i < 5; i++) {
+                          if (ratingStars === 0) {
+                            allStars += starElement;
+                          } else {
+                            ratingStars -= 1;
+                            allStars += starCheckedElement;
+                          }
+                        }
+                        // Получаем вариант для выводы цены
+                        let priceLayout = '';
+                        if (oldPrice != null) {
+                          priceLayout = `
+                          <p class="card-text price-text discount">
+                            <strong>${price}</strong>
+                            <small class="ml-2">${oldPrice}</small>
+                          </p>`;
+                        } else {
+                          priceLayout = `
+                          <p class="card-text price-text">
+                            <strong>${price}</strong>
+                          </p>
+                          `;
+                        }
+                        // Заполняем карту товара
+                        allCards += `
+                          <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                                <div class="card-img-wrap">
+                                    <img class="card-img-top" src="${imgUrl}" alt="Card image cap">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${title}</h5>
+                                    <div class="rate">
+                                        ${allStars}
+                                        <span class="rate-amount ml-2">${reviewAmount}</span>
+                                    </div>
+                                    ${priceLayout}
+                                </div>
+                            </div>
+                          </div>
+                        `;
+                      });
+                      cards.innerHTML = allCards;
+                     });
     }
 }
 
