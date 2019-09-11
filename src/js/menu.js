@@ -124,18 +124,20 @@ class Menu {
         </ul>
       `;
     element.innerHTML = layout;
-
+    const background = document.querySelector('.backdrop');
     const menuItems = element.querySelectorAll('.list-group-item');
 
     function showDropdownMenu(event) {
       let target = event.target;
       let dropMenu = target.querySelector('.dropdown-menu');
       dropMenu.classList.add('show');
+      background.classList.add('show');
     }
     function hideDropdownMenu(event) {
       let target = event.target;
       let dropMenu = target.querySelector('.dropdown-menu');
       dropMenu.classList.remove('show');
+      background.classList.remove('show');
     }
     menuItems.forEach(item => {
       item.addEventListener('mouseenter', showDropdownMenu);
