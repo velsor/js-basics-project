@@ -77,7 +77,103 @@
 
 class LoginForm {
     constructor(element) {
-        // Ваш код
+      // Ваш код
+      const layout = `
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+              <form name="loginForm">
+                  <div class="alert alert-danger" role="alert" style="display: none;">
+                      Passwords should be the same!
+                  </div>
+                  <div class="jumbotron jumbotron-light jumbotron-form">
+                      <div class="form-group">
+                          <label for="exampleInputEmail1">Email</label>
+                          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="exampleInputPassword1">Password Check</label>
+                          <input type="password" name="passwordCheck" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                      </div>
+
+                      <div class="form-check mb-4">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary btn-lg by-now-button">Buy now</button>
+                  </div>
+              </form>
+              <div class="h4 text-center font-weight-normal text-uppercase my-5 d-none d-lg-block">or</div>
+              <div class="socials mb-5">
+                  <a href="#" class="btn btn-primary btn-social -fb">
+                      <img src="assets/icons/icon-facebook.svg" alt="">
+                      Facebook
+                  </a>
+                  <a href="#" class="btn btn-primary btn-social -vk">
+                      <img src="assets/icons/icon-vk.svg" alt="">
+                      Vkontakte
+                  </a>
+                  <a href="#" class="btn btn-primary btn-social -twitter">
+                      <img src="assets/icons/icon-twitter.svg" alt="">
+                      Twitter
+                  </a>
+              </div>
+          </div>
+        </div>
+      `;
+      element.innerHTML = layout;
+
+      const registerUrl = 'https://httpbin.org/post';
+      const form = document.forms;
+      const registerForm = form.loginForm;
+      const error = element.querySelector('.alert-danger');
+      const passwordField = registerForm.password;
+      const passwordCheckField = registerForm.passwordCheck;
+
+      function checkPassword(event) {
+        let password = registerForm.password.value;
+        let passwordCheck = registerForm.passwordCheck.value;
+
+        if (password && passwordCheck) {
+          if (password !== passwordCheck) {
+            error.style.display = 'block';
+            registerForm.reset();
+            return;
+          }
+        }
+      }
+      function deleteError(event) {
+        error.style.display = 'none';
+      }
+      function sendFormToServer(event) {
+        let login = registerForm.email;
+        let password = registerForm.password;
+        let user = {
+          login: login.value,
+          password: password.value,
+        }
+        fetch(registerUrl, {
+          method: 'POST',
+          body: JSON.stringify(user)
+        })
+        .then((response) => response.json())
+        .then((result) => console.dir(result));
+      }
+
+      passwordField.addEventListener('blur', checkPassword);
+      passwordCheckField.addEventListener('blur', checkPassword);
+      passwordField.addEventListener('focus', deleteError);
+      passwordCheckField.addEventListener('focus', deleteError);
+      registerForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        sendFormToServer();
+      });
     }
 }
 
